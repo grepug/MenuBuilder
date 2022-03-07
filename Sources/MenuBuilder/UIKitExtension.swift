@@ -25,6 +25,7 @@ public extension UIMenu {
                 let menu = UIMenu(options: [.displayInline],
                                   children: recursivelyMakeMenu(children: item.children,
                                                                 completion: completion))
+                
                 elements.append(menu)
             } else if !item.children.isEmpty {
                 let menu = UIMenu(title: item.title,

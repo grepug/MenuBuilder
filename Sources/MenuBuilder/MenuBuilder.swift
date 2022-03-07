@@ -51,7 +51,7 @@ public struct Button: MenuConvertible {
     var checked: Bool
     var action: () -> Void
     
-    public init(title: String? = nil,
+    public init(_ title: String? = nil,
                 image: PlatformImage? = nil,
                 checked: Bool = false,
                 action: @escaping () -> Void) {
@@ -62,7 +62,7 @@ public struct Button: MenuConvertible {
     }
     
     public func asMenu() -> [Menu] {
-        [.init(title: title ?? "",
+        [.init(title ?? "",
                image: image,
                checked: checked,
                action: action,
@@ -78,7 +78,7 @@ public struct Menu: MenuConvertible {
     var action: (() -> Void)?
     var children: [Menu]
     
-    public init(title: String,
+    public init(_ title: String,
                 image: PlatformImage? = nil,
                 checked: Bool = false,
                 action: (() -> Void)? = nil,
@@ -100,7 +100,7 @@ public struct Group: MenuConvertible {
     var children: [Menu]
     
     public func asMenu() -> [Menu] {
-        [.init(title: title,
+        [.init(title,
                action: nil,
                children: { children })]
     }
