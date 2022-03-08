@@ -49,15 +49,18 @@ public struct Button: MenuConvertible {
     var title: String?
     var image: PlatformImage?
     var checked: Bool
+    var attributes: UIMenuElement.Attributes?
     var action: () -> Void
     
     public init(_ title: String? = nil,
                 image: PlatformImage? = nil,
                 checked: Bool = false,
+                attributes: UIMenuElement.Attributes? = nil,
                 action: @escaping () -> Void) {
         self.title = title
         self.image = image
         self.checked = checked
+        self.attributes = attributes
         self.action = action
     }
     
@@ -65,9 +68,9 @@ public struct Button: MenuConvertible {
         [.init(title ?? "",
                image: image,
                checked: checked,
+               attributes: attributes,
                action: action,
                children: {})]
-
     }
 }
 
@@ -75,18 +78,21 @@ public struct Menu: MenuConvertible {
     var title: String
     var image: PlatformImage?
     var checked: Bool
+    var attributes: UIMenuElement.Attributes?
     var action: (() -> Void)?
     var children: [Menu]
     
     public init(_ title: String,
                 image: PlatformImage? = nil,
                 checked: Bool = false,
+                attributes: UIMenuElement.Attributes? = nil,
                 action: (() -> Void)? = nil,
                 @MenuBuilder children: @escaping () -> [Menu]) {
         self.title = title
         self.image = image
         self.action = action
         self.checked = checked
+        self.attributes = attributes
         self.children = children()
     }
     

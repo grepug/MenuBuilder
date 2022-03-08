@@ -36,6 +36,7 @@ public extension UIMenu {
             } else {
                 let action = UIAction(title: item.title,
                                       image: item.image,
+                                      attributes: item.attributes ?? [],
                                       state: item.checked ? .on : .off) { _ in
                     item.action?()
                     completion?()
