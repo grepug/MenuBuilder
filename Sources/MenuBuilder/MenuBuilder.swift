@@ -120,3 +120,6 @@ public struct Group: MenuConvertible {
 #if os(iOS)
 public typealias PlatformImage = UIImage
 #endif
+
+public typealias MBMenu = Menu
+public typealias MBButton = Button
