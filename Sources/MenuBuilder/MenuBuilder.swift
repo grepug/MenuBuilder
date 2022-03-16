@@ -49,26 +49,30 @@ public struct Button: MenuConvertible {
     var title: String?
     var image: PlatformImage?
     var checked: Bool
-    var attributes: UIMenuElement.Attributes?
+    var destructive: Bool
+    var color: PlatformColor?
     var action: () -> Void
     
     public init(_ title: String? = nil,
                 image: PlatformImage? = nil,
+                color: PlatformColor? = nil,
                 checked: Bool = false,
-                attributes: UIMenuElement.Attributes? = nil,
+                destructive: Bool = false,
                 action: @escaping () -> Void) {
         self.title = title
         self.image = image
         self.checked = checked
-        self.attributes = attributes
+        self.color = color
+        self.destructive = destructive
         self.action = action
     }
     
     public func asMenu() -> [Menu] {
         [.init(title ?? "",
                image: image,
+               color: color,
                checked: checked,
-               attributes: attributes,
+               destructive: destructive,
                action: action,
                children: {})]
     }
@@ -78,21 +82,24 @@ public struct Menu: MenuConvertible {
     var title: String
     var image: PlatformImage?
     var checked: Bool
-    var attributes: UIMenuElement.Attributes?
+    var destructive: Bool
+    var color: PlatformColor?
     var action: (() -> Void)?
     var children: [Menu]
     
     public init(_ title: String,
                 image: PlatformImage? = nil,
+                color: PlatformColor? = nil,
                 checked: Bool = false,
-                attributes: UIMenuElement.Attributes? = nil,
+                destructive: Bool = false,
                 action: (() -> Void)? = nil,
                 @MenuBuilder children: @escaping () -> [Menu]) {
         self.title = title
         self.image = image
         self.action = action
+        self.color = color
         self.checked = checked
-        self.attributes = attributes
+        self.destructive = destructive
         self.children = children()
     }
     
@@ -119,6 +126,7 @@ public struct Group: MenuConvertible {
 
 #if os(iOS)
 public typealias PlatformImage = UIImage
+public typealias PlatformColor = UIColor
 #endif
 
 public typealias MBMenu = Menu

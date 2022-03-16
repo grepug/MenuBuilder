@@ -7,6 +7,12 @@
 
 import UIKit
 
+public extension Array where Element == UIMenuElement {
+    static func makeMenu(_ menus: [Menu], completion: (() -> Void)? = nil) -> UIMenu {
+        UIMenu.makeMenu(menus, completion: completion)
+    }
+}
+
 public extension UIMenu {
     static func makeMenu(_ menus: [Menu], completion: (() -> Void)? = nil) -> UIMenu {
         let children = Self.recursivelyMakeMenu(children: menus,
@@ -36,7 +42,7 @@ public extension UIMenu {
             } else {
                 let action = UIAction(title: item.title,
                                       image: item.image,
-                                      attributes: item.attributes ?? [],
+                                      attributes: item.destructive ? .destructive : [],
                                       state: item.checked ? .on : .off) { _ in
                     item.action?()
                     completion?()
@@ -47,5 +53,32 @@ public extension UIMenu {
         }
         
         return elements
+    }
+}
+
+public extension Array where Element == UIContextualAction {
+    static func makeActions(_ menus: [Menu]) -> [UIContextualAction] {
+        var actions = [UIContextualAction]()
+        
+        for menu in menus {
+            let action = UIContextualAction(style: menu.destructive ? .destructive : .normal,
+                                            title: menu.title) { _, _, completion in
+                menu.action?()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    completion(true)
+                }
+            }
+            
+            action.image = menu.image
+            
+            if let color = menu.color {
+                action.backgroundColor = color
+            }
+            
+            actions.append(action)
+        }
+        
+        return actions
     }
 }
