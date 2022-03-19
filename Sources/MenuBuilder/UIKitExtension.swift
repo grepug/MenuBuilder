@@ -70,7 +70,10 @@ public extension Array where Element == UIContextualAction {
                 }
             }
             
-            action.image = menu.image
+            if let image = menu.image {
+                action.image = image
+                action.title = nil
+            }
             
             if let color = menu.color {
                 action.backgroundColor = color
