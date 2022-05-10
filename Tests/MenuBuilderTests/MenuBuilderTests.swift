@@ -8,25 +8,25 @@ final class MenuBuilderTests: XCTestCase {
         // results.
 //        XCTAssertEqual(MenuBuilder().text, "Hello, World!")
         
-        let menu = makeMenu {
-            Menu(title: "1") {
-                Button(title: "1.1") {
-                    
-                }
-                Divider()
-                
-                Menu(title: "1.2") {
-                    Button(title: "1.2.1") {
-                        
-                    }
-                    
-                    Button(title: "1.2.2") {
-                        
-                    }
-                }
-            }
-        }
-        
-        print(menu[0].childrenContent())
+//        let menu = makeMenu {
+//            Menu(title: "1") {
+//                Button(title: "1.1") {
+//                    
+//                }
+//                Divider()
+//                
+//                Menu(title: "1.2") {
+//                    Button(title: "1.2.1") {
+//                        
+//                    }
+//                    
+//                    Button(title: "1.2.2") {
+//                        
+//                    }
+//                }
+//            }
+//        }
+//        
+//        print(menu[0].childrenContent())
     }
 }
