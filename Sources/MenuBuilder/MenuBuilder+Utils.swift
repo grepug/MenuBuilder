@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 public extension Button {
-    static func delete(action: @escaping ((Bool) -> Void) -> Void) -> Button {
+    static func delete(action: @escaping (@escaping (Bool) -> Void) -> Void) -> Button {
         .init("action_discard".loc,
               image: .init(systemName: "trash")!,
               color: .systemRed,

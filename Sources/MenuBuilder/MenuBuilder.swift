@@ -51,14 +51,14 @@ public struct Button: MenuConvertible {
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
-    var action: ((Bool) -> Void) -> Void
+    var action: (@escaping (Bool) -> Void) -> Void
     
     public init(_ title: String? = nil,
                 image: PlatformImage? = nil,
                 color: PlatformColor? = nil,
                 checked: Bool = false,
                 destructive: Bool = false,
-                action: @escaping ((Bool) -> Void) -> Void) {
+                action: @escaping (@escaping (Bool) -> Void) -> Void) {
         self.title = title
         self.image = image
         self.checked = checked
@@ -101,7 +101,7 @@ public struct Menu: MenuConvertible {
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
-    var action: (((Bool) -> Void) -> Void)?
+    var action: ((@escaping (Bool) -> Void) -> Void)?
     var children: [Menu]
     
     public init(_ title: String,
@@ -109,7 +109,7 @@ public struct Menu: MenuConvertible {
                 color: PlatformColor? = nil,
                 checked: Bool = false,
                 destructive: Bool = false,
-                action: (((Bool) -> Void) -> Void)? = nil,
+                action: ((@escaping (Bool) -> Void) -> Void)? = nil,
                 @MenuBuilder children: @escaping () -> [Menu]) {
         self.title = title
         self.image = image
