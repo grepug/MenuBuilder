@@ -44,7 +44,7 @@ public extension UIMenu {
                                       image: item.image,
                                       attributes: item.destructive ? .destructive : [],
                                       state: item.checked ? .on : .off) { _ in
-                    item.action?()
+                    item.action?({ _ in })
                     completion?()
                 }
 
@@ -63,11 +63,7 @@ public extension Array where Element == UIContextualAction {
         for menu in menus {
             let action = UIContextualAction(style: menu.destructive ? .destructive : .normal,
                                             title: menu.title) { _, _, completion in
-                menu.action?()
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    completion(true)
-                }
+                menu.action?(completion)
             }
             
             if let image = menu.image {

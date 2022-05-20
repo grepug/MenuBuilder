@@ -51,7 +51,21 @@ public struct Button: MenuConvertible {
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
-    var action: () -> Void
+    var action: ((Bool) -> Void) -> Void
+    
+    public init(_ title: String? = nil,
+                image: PlatformImage? = nil,
+                color: PlatformColor? = nil,
+                checked: Bool = false,
+                destructive: Bool = false,
+                action: @escaping ((Bool) -> Void) -> Void) {
+        self.title = title
+        self.image = image
+        self.checked = checked
+        self.color = color
+        self.destructive = destructive
+        self.action = action
+    }
     
     public init(_ title: String? = nil,
                 image: PlatformImage? = nil,
@@ -64,7 +78,10 @@ public struct Button: MenuConvertible {
         self.checked = checked
         self.color = color
         self.destructive = destructive
-        self.action = action
+        self.action = { completion in
+            action()
+            completion(true)
+        }
     }
     
     public func asMenu() -> [Menu] {
@@ -84,7 +101,7 @@ public struct Menu: MenuConvertible {
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
-    var action: (() -> Void)?
+    var action: (((Bool) -> Void) -> Void)?
     var children: [Menu]
     
     public init(_ title: String,
@@ -92,7 +109,7 @@ public struct Menu: MenuConvertible {
                 color: PlatformColor? = nil,
                 checked: Bool = false,
                 destructive: Bool = false,
-                action: (() -> Void)? = nil,
+                action: (((Bool) -> Void) -> Void)? = nil,
                 @MenuBuilder children: @escaping () -> [Menu]) {
         self.title = title
         self.image = image
