@@ -91,6 +91,7 @@ public struct Button: MenuConvertible {
     
     public func asMenu() -> [Menu] {
         [.init(title ?? "",
+               subtitle: subtitle,
                image: image,
                color: color,
                checked: checked,
