@@ -48,12 +48,14 @@ public extension MenuBuilder {
 public struct Button: MenuConvertible {
     var title: String?
     var image: PlatformImage?
+    var subtitle: String?
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
     var action: (@escaping (Bool) -> Void) -> Void
     
     public init(_ title: String? = nil,
+                subtitle: String? = nil,
                 image: PlatformImage? = nil,
                 color: PlatformColor? = nil,
                 checked: Bool = false,
@@ -61,6 +63,7 @@ public struct Button: MenuConvertible {
                 action: @escaping (@escaping (Bool) -> Void) -> Void) {
         self.title = title
         self.image = image
+        self.subtitle = subtitle
         self.checked = checked
         self.color = color
         self.destructive = destructive
@@ -68,6 +71,7 @@ public struct Button: MenuConvertible {
     }
     
     public init(_ title: String? = nil,
+                subtitle: String? = nil,
                 image: PlatformImage? = nil,
                 color: PlatformColor? = nil,
                 checked: Bool = false,
@@ -76,6 +80,7 @@ public struct Button: MenuConvertible {
         self.title = title
         self.image = image
         self.checked = checked
+        self.subtitle = subtitle
         self.color = color
         self.destructive = destructive
         self.action = { completion in
@@ -98,6 +103,7 @@ public struct Button: MenuConvertible {
 public struct Menu: MenuConvertible {
     var title: String
     var image: PlatformImage?
+    var subtile: String?
     var checked: Bool
     var destructive: Bool
     var color: PlatformColor?
@@ -105,6 +111,7 @@ public struct Menu: MenuConvertible {
     var children: [Menu]
     
     public init(_ title: String,
+                subtitle: String? = nil,
                 image: PlatformImage? = nil,
                 color: PlatformColor? = nil,
                 checked: Bool = false,
@@ -113,6 +120,7 @@ public struct Menu: MenuConvertible {
                 @MenuBuilder children: @escaping () -> [Menu]) {
         self.title = title
         self.image = image
+        self.subtile = subtitle
         self.action = action
         self.color = color
         self.checked = checked

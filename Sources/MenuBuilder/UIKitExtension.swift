@@ -38,6 +38,11 @@ public extension UIMenu {
                                   image: item.image,
                                   children: recursivelyMakeMenu(children: item.children,
                                                                 completion: completion))
+                
+                if #available(iOS 15.0, *) {
+                    menu.subtitle = item.subtile
+                }
+                
                 elements.append(menu)
             } else {
                 let action = UIAction(title: item.title,
