@@ -52,6 +52,10 @@ public extension UIMenu {
                     item.action?({ _ in })
                     completion?()
                 }
+                
+                if #available(iOS 15.0, *) {
+                    action.subtitle = item.subtile
+                }
 
                 elements.append(action)
             }
