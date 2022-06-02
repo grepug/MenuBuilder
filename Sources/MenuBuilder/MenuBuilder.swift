@@ -157,3 +157,4 @@ public typealias PlatformColor = UIColor
 
 public typealias MBMenu = Menu
 public typealias MBButton = Button
+public typealias MBGroup = Group
