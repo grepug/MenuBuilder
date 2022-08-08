@@ -25,11 +25,28 @@ public extension Button {
               action: action)
     }
     
+    static func delete(action: @escaping () async -> Bool) -> Button {
+        Self.delete { completion in
+            Task {
+                let result = await action()
+                completion(result)
+            }
+        }
+    }
+    
     static func edit(action: @escaping () -> Void) -> Button {
         .init("action_edit".loc,
               image: .init(systemName: "pencil")!,
               color: .systemBlue,
               action: action)
+    }
+    
+    static func edit(action: @escaping () async -> Void) -> Button {
+        Self.edit {
+            Task {
+                await action()
+            }
+        }
     }
     
     static func detail(_ title: String? = nil, action: @escaping () -> Void) -> Button {
