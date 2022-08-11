@@ -25,7 +25,7 @@ public extension Button {
               action: action)
     }
     
-    static func delete(action: @escaping () async -> Bool) -> Button {
+    static func delete(action: @MainActor @escaping () async -> Bool) -> Button {
         Self.delete { completion in
             Task {
                 let result = await action()
@@ -41,7 +41,7 @@ public extension Button {
               action: action)
     }
     
-    static func edit(action: @escaping () async -> Void) -> Button {
+    static func edit(action: @MainActor @escaping () async -> Void) -> Button {
         Self.edit {
             Task {
                 await action()
