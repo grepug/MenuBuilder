@@ -29,7 +29,10 @@ public extension Button {
         Self.delete { completion in
             Task {
                 let result = await action()
-                completion(result)
+                
+                DispatchQueue.main.async {
+                    completion(result)
+                }
             }
         }
     }
